@@ -1,0 +1,59 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at
+  # https://dart-lang.github.io/linter/lints/index.html.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
+    always_declare_return_types: true # Declare method return types.
+    always_put_control_body_on_new_line: true # Separate the control structure expression from its statement.
+    always_put_required_named_parameters_first: true # Put required named parameters first.
+    always_use_package_imports: true # ??????
+    annotate_overrides: true # ??????
+    avoid_print: true  # Uncomment to disable the `avoid_print` rule
+    avoid_empty_else: true # Avoid empty statements in else clauses.
+    avoid_multiple_declarations_per_line: true # Don't declare multiple variables on a single line.
+    avoid_void_async: true # Avoid async functions that return void.
+    await_only_futures: true # Await only futures.
+    camel_case_types: true # Name types using UpperCamelCase.
+    empty_catches: true # Avoid empty catch blocks.
+    empty_statements: true # Avoid empty statements.Avoid empty statements.
+    lines_longer_than_80_chars: true # Avoid lines longer than 80 characters.
+    no_duplicate_case_values: true # Don't use more than one case with same value.
+    no_literal_bool_comparisons: true # Don't compare Boolean expressions to Boolean literals.
+    prefer_asserts_with_message: true # Prefer asserts with message.
+    prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    require_trailing_commas: true # ???????
+    sort_constructors_first: true # Sort constructor declarations before other members.
+    sort_child_properties_last: true # Sort child properties last in widget instance creations.
+    sort_pub_dependencies: true # Sort pub dependencies alphabetically.
+    sort_unnamed_constructors_first: true # Sort unnamed constructor declarations first.
+    type_annotate_public_apis: true # Type annotate public APIs.
+    type_literal_in_constant_pattern: true # ????????
+    unnecessary_breaks: true # Don't use explicit breaks when a break is implied.
+    unnecessary_new: true # Unnecessary new keyword.
+    unnecessary_parenthesis: true # Unnecessary parentheses can be removed.
+
+  analyzer:
+    errors:
+      avoid_print: info  # Uncomment to disable the `avoid_print` rule
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
