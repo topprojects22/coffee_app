@@ -8,6 +8,7 @@ class AppColors {
     100: Color(0xFFF8DEC3),
     200: Color(0xFFF3C89C),
     300: Color(0xFFEEB274),
+    350: Color(0xFFFCC43D),
     400: Color(0xFFEAA256),
     500: Color(0xFFE69138),
     600: Color(0xFFE38932),
@@ -19,4 +20,14 @@ class AppColors {
   static const Map<int, Color> purple = <int, Color>{
     50: Color(0xFF7357a4),
   };
+
+  static const Map<int, Color> brown = <int, Color>{
+    50: Color(0xFF44210E),
+  };
+
+  static const Map<int, Color> green = <int, Color>{
+    50: Color(0xFF83A31A),
+  };
 }
+
+

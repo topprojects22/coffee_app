@@ -1,16 +1,8 @@
-import 'package:boilerplate/core/widgets/bottomBar/navigation_bar_widget.dart';
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/di/service_locator.dart';
-import 'package:boilerplate/domain/entity/language/Language.dart';
-import 'package:boilerplate/presentation/home/store/language/language_store.dart';
-import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
-import 'package:boilerplate/utils/locale/app_localization.dart';
-import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:boilerplate/core/widgets/homeMainContainer/home_main_container.dart';
+import 'package:boilerplate/core/widgets/platform/text/text_ui.dart';
 
-import 'package:boilerplate/core/widgets/bottomBar/floating_action_button_widget.dart';
+import 'package:boilerplate/core/widgets/platform/image/image_ui.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,139 +12,58 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //stores:---------------------------------------------------------------------
-  final ThemeStore _themeStore = getIt<ThemeStore>();
-  final LanguageStore _languageStore = getIt<LanguageStore>();
-
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: null,
-      bottomNavigationBar: BottomBarWidget(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
-      floatingActionButton: const FloatingActionButtonWidget(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
-  }
-
-  // app bar methods:-----------------------------------------------------------
-  PreferredSizeWidget _buildAppBar() {
-    return AppBar(
-      title: Text(AppLocalizations.of(context).translate('home_tv_posts')),
-      actions: _buildActions(context),
-    );
-  }
-
-  List<Widget> _buildActions(BuildContext context) {
-    return <Widget>[
-      _buildLanguageButton(),
-      _buildThemeButton(),
-      _buildLogoutButton(),
-    ];
-  }
-
-  Widget _buildThemeButton() {
-    return Observer(
-      builder: (BuildContext context) {
-        return IconButton(
-          onPressed: () {
-            _themeStore.changeBrightnessToDark(!_themeStore.darkMode);
-          },
-          icon: Icon(
-            _themeStore.darkMode ? Icons.brightness_5 : Icons.brightness_3,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildLogoutButton() {
-    return IconButton(
-      onPressed: () {
-        SharedPreferences.getInstance().then((SharedPreferences preference) {
-          preference.setBool(Preferences.isLoggedIn, false);
-        });
-      },
-      icon: const Icon(
-        Icons.power_settings_new,
-      ),
-    );
-  }
-
-  Widget _buildLanguageButton() {
-    return IconButton(
-      onPressed: () {
-        _buildLanguageDialog();
-      },
-      icon: const Icon(
-        Icons.language,
-      ),
-    );
-  }
-
-  void _buildLanguageDialog() {
-    _showDialog<String>(
-      context: context,
-      child: AlertDialog(
-        // borderRadius: 5.0,
-        // enableFullWidth: true,
-
-        title: Text(
-          AppLocalizations.of(context).translate('home_tv_choose_language'),
-        ),
-        // headerColor: Theme.of(context).primaryColor,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        // closeButtonColor: Colors.white,
-        // enableCloseButton: true,
-        // enableBackButton: false,
-        // onCloseButtonClicked: () {
-        //   Navigator.of(context).pop();
-        // },
-        actions: _languageStore.supportedLanguages
-            // children: _languageStore.supportedLanguages
-            .map(
-              (Language object) => ListTile(
-                dense: true,
-                contentPadding: const EdgeInsets.all(0.0),
-                title: Text(
-                  object.language,
-                  style: TextStyle(
-                    color: _languageStore.locale == object.locale
-                        ? Theme.of(context).primaryColor
-                        : _themeStore.darkMode
-                            ? Colors.white
-                            : Colors.black,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  // change user language based on selected locale
-                  _languageStore.changeLanguage(object.locale);
-                },
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitHeight,
+                image: AssetImage('assets/images/backGround_1.png'),
               ),
-            )
-            .toList(),
+            ),
+            alignment: Alignment.topCenter,
+            // color: AppColors.brown[50],
+            child: const Positioned(
+              top: 200,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 100),
+                child: null,
+              ),
+            ),
+          ),
+          const SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextUi(
+                  title: 'Coffee Cup App',
+                  type: TextType.titleLarge,
+                  color: Colors.white,
+                  isCustomTitle: true,
+                ),
+                SizedBox(height: 80),
+                BaseInfoBlock(),
+              ],
+            ),
+          ),
+          Positioned(
+            top: 360,
+            right: 50,
+            child: Container(
+              alignment: Alignment.center,
+              child: const ImageUi(
+                src: 'assets/images/coffee_main_cup2.png',
+                // fit: BoxFit.cover,
+                height: 100,
+              ),
+            ),
+          ),
+        ],
       ),
     );
-  }
-
-  void _showDialog<T>({required BuildContext context, required Widget child}) {
-    showDialog<T>(
-      context: context,
-      builder: (BuildContext context) => child,
-    ).then<void>((T? value) {
-      // The value passed to Navigator.pop() or null.
-    });
   }
 }
