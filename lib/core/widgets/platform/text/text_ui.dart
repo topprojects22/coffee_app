@@ -16,14 +16,15 @@ enum TextType {
 
 class TextUi extends StatelessWidget {
   const TextUi({
-    super.key,
     required this.title,
     required this.type,
+    super.key,
     this.color,
     this.textAlign,
     this.maxLines,
     this.gradient,
     this.softWrap,
+    this.isCustomTitle, // TODO Подумать над названием переменной
   });
 
   final title;
@@ -33,6 +34,7 @@ class TextUi extends StatelessWidget {
   final maxLines;
   final List<Color>? gradient;
   final softWrap;
+  final bool? isCustomTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ class TextUi extends StatelessWidget {
       ).createShader(const Rect.fromLTWH(0.0, 0.0, 320.0, 80.0));
     }
 
-    final textStyle;
+    final TextStyle textStyle;
 
     if (gradient != null) {
       textStyle = TextStyle(
@@ -98,8 +100,13 @@ class TextUi extends StatelessWidget {
       );
     }
 
+    var text = title;
+    if (isCustomTitle == false || isCustomTitle == null) {
+      text = AppLocalizations.of(context).translate(title);
+    }
+
     return Text(
-      AppLocalizations.of(context).translate(title),
+      text,
       maxLines: maxLines ?? 1,
       overflow: TextOverflow.ellipsis,
       softWrap: softWrap ?? false,

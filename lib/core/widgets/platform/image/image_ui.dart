@@ -8,12 +8,14 @@ class ImageUi extends StatelessWidget {
     this.width,
     this.height,
     this.rotate,
+    this.fit,
   });
 
   final String src;
   final double? width;
   final double? height;
   final double? rotate;
+  final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class ImageUi extends StatelessWidget {
           src,
           width: width,
           height: height,
+          fit: fit,
         ),
         rotate ?? 0,
       );
