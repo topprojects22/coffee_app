@@ -15,6 +15,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.leadingIcon,
     this.trailingIcon,
     this.mainAxisSize,
+    this.side,
   });
   final String text;
   final VoidCallback onPressed;
@@ -26,6 +27,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Widget? trailingIcon;
   final MainAxisSize? mainAxisSize;
   final Color? textColor;
+  final dynamic side;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class CustomElevatedButton extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 8.0),
+          side: side,
         ),
       ),
       child: Row(

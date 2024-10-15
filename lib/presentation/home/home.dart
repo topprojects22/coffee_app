@@ -45,21 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   isCustomTitle: true,
                 ),
-                SizedBox(height: 80),
+                SizedBox(height: 20),
                 BaseInfoBlock(),
               ],
-            ),
-          ),
-          Positioned(
-            top: 360,
-            right: 50,
-            child: Container(
-              alignment: Alignment.center,
-              child: const ImageUi(
-                src: 'assets/images/coffee_main_cup2.png',
-                // fit: BoxFit.cover,
-                height: 100,
-              ),
             ),
           ),
         ],
